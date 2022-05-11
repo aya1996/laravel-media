@@ -23,17 +23,17 @@ class VideoController extends Controller
 
         $this->validate($request, [
             'title' => 'required|string|max:255',
-            'videoName' => 'required|file|mimetypes:video/mp4,pdf',
+            'videoName' => 'required|file|required|mimes:pdf,mp4'
         ]);
 
-
+        // return $request->all();
 
         if ($request->hasFile('videoName')) {
             $filenameWithExt = $request->file('videoName')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('videoName')->getClientOriginalExtension();
             $fileNameToStore = uniqid() . '_' . time() . '.' . $extension;
-            $path = $request->file('videoName')->storeAs('public/videos/', $fileNameToStore);
+            $request->file('videoName')->move(public_path() . '/videos/', $filenameWithExt);
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
