@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/addProduct', [ProductController::class, 'create']);
 Route::post('/addProduct', [ProductController::class, 'store']);
+Route::post('/addVideo', [VideoController::class, 'store']);
+Route::get('/addVideo', [VideoController::class, 'create']);
 
 Auth::routes();
 

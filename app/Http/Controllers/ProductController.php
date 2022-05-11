@@ -16,7 +16,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        
+
 
         $this->validate($request, [
 
@@ -33,7 +33,8 @@ class ProductController extends Controller
         if ($request->hasfile('filename')) {
 
             foreach ($request->file('filename') as $image) {
-                $name = $image->getClientOriginalName();
+                // $name = $image->getClientOriginalName();
+                $name = $image->uniqid();
                 $image->move(public_path() . '/images/', $name);
                 $data[] = $name;
             }
